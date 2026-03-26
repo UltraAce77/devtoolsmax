@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DevToolsMax — Free Online Developer Tools | JSON Formatter, Base64, UUID Generator</title>
+<meta name="description" content="Free online developer tools — JSON formatter, Base64 encoder/decoder, URL encoder, UUID generator, password generator and word counter. No signup, no ads, runs in your browser.">
+<meta name="keywords" content="free developer tools, JSON formatter, base64 encoder, UUID generator, password generator, URL encoder, word counter, online dev tools, devtoolsmax">
+<meta name="author" content="DevToolsMax">
+<meta property="og:title" content="DevToolsMax — Free Online Developer Tools">
+<meta property="og:description" content="Clean, fast developer utilities. JSON, Base64, UUID, passwords and more. No signup required.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://devtoolsmax.me">
+<link rel="canonical" href="https://devtoolsmax.me">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"DevToolsMax","url":"https://devtoolsmax.me","description":"Free online developer tools","potentialAction":{"@type":"SearchAction","target":"https://devtoolsmax.me/?q={search_term_string}","query-input":"required name=search_term_string"}}</script>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Syne:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --black:#050508;
+  --black2:#0c0c12;
+  --black3:#13131c;
+  --black4:#1c1c28;
+  --cyan:#00e5cc;
+  --cyan-dim:#00b8a4;
+  --cyan-pale:rgba(0,229,204,0.08);
+  --cyan-border:rgba(0,229,204,0.2);
+  --text:#e8e8f0;
+  --muted:#6b6b88;
+  --muted2:#9999b8;
+  --border:rgba(255,255,255,0.06);
+  --border2:rgba(255,255,255,0.1);
+  --mono:'IBM Plex Mono',monospace;
+  --sans:'Syne',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--text);font-family:var(--sans);min-height:100vh;-webkit-font-smoothing:antialiased}
+
+nav{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1rem 2.5rem;
+  border-bottom:1px solid var(--border);
+  background:rgba(5,5,8,0.95);
+  position:sticky;top:0;z-index:100;
+}
+.logo{font-family:var(--mono);font-size:1rem;color:var(--text);letter-spacing:-0.5px;display:flex;align-items:center;gap:0.5rem}
+.logo-dot{width:8px;height:8px;border-radius:50%;background:var(--cyan)}
+.logo em{color:var(--cyan);font-style:normal}
+.nav-right{display:flex;align-items:center;gap:1.5rem}
+.nav-links{display:flex;gap:1.5rem}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:0.82rem;font-weight:400;transition:color 0.15s;cursor:pointer;letter-spacing:0.3px}
+.nav-links a:hover{color:var(--cyan)}
+.nav-badge{background:var(--cyan-pale);border:1px solid var(--cyan-border);color:var(--cyan);font-family:var(--mono);font-size:0.68rem;padding:0.3rem 0.7rem;border-radius:100px;letter-spacing:0.5px}
+
+.hero{padding:5rem 2.5rem 3.5rem;max-width:900px;margin:0 auto;text-align:center}
+.hero-label{font-family:var(--mono);font-size:0.72rem;color:var(--cyan);letter-spacing:2px;text-transform:uppercase;margin-bottom:1.5rem;opacity:0.8}
+h1{font-family:var(--sans);font-size:clamp(2.8rem,6vw,4.2rem);font-weight:700;line-height:1.05;letter-spacing:-2px;margin-bottom:1.4rem;color:#fff}
+h1 .line2{color:var(--cyan);display:block}
+.hero-sub{color:var(--muted2);font-size:1rem;font-weight:300;line-height:1.75;max-width:500px;margin:0 auto 2.5rem;letter-spacing:0.2px}
+.hero-stats{display:flex;justify-content:center;gap:3rem;padding:1.5rem 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin-bottom:3.5rem}
+.stat-item{text-align:center}
+.stat-num{font-family:var(--mono);font-size:1.6rem;color:var(--cyan);font-weight:600;display:block;letter-spacing:-1px}
+.stat-lbl{font-size:0.72rem;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-top:0.2rem}
+
+.section-label{font-family:var(--mono);font-size:0.7rem;color:var(--muted);letter-spacing:2px;text-transform:uppercase;max-width:1100px;margin:0 auto 1.2rem;padding:0 2.5rem}
+
+.tabs-bar{max-width:1100px;margin:0 auto 0;padding:0 2.5rem;display:flex;gap:0;border-bottom:1px solid var(--border)}
+.tab{padding:0.8rem 1.4rem;font-size:0.8rem;font-weight:400;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;transition:all 0.15s;white-space:nowrap;background:none;border-left:none;border-right:none;border-top:none;font-family:var(--sans);letter-spacing:0.3px}
+.tab.active{color:var(--cyan);border-bottom-color:var(--cyan)}
+.tab:hover:not(.active){color:var(--text)}
+
+.tools-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1px;background:var(--border);max-width:1100px;margin:0 auto 2rem;border:1px solid var(--border);overflow:hidden}
+.tool-card{background:var(--black2);padding:1.8rem;cursor:pointer;transition:background 0.15s;display:none;position:relative;overflow:hidden}
+.tool-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:transparent;transition:background 0.15s}
+.tool-card:hover{background:var(--black3)}
+.tool-card:hover::before{background:var(--cyan)}
+.tool-card.vis{display:block}
+.tool-cat{font-family:var(--mono);font-size:0.65rem;color:var(--cyan);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:1rem;opacity:0.7}
+.tool-card h3{font-size:1rem;font-weight:600;margin-bottom:0.5rem;color:#fff;letter-spacing:-0.3px}
+.tool-card p{font-size:0.82rem;color:var(--muted2);line-height:1.65;margin-bottom:1.4rem;font-weight:300}
+.tool-open{display:inline-flex;align-items:center;gap:0.5rem;padding:0.5rem 1rem;border:1px solid var(--border2);border-radius:6px;font-family:var(--mono);font-size:0.75rem;color:var(--text);cursor:pointer;transition:all 0.15s;background:transparent}
+.tool-open:hover{border-color:var(--cyan);color:var(--cyan)}
+.tool-open svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2}
+
+.workspace{max-width:860px;margin:0 auto 3rem;padding:0 2.5rem;display:none}
+.workspace.open{display:block}
+.ws-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}
+.ws-name{font-family:var(--mono);font-size:0.85rem;color:var(--cyan);display:flex;align-items:center;gap:0.6rem}
+.ws-name::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--cyan);display:inline-block}
+.ws-x{background:none;border:1px solid var(--border2);color:var(--muted);padding:0.35rem 0.8rem;border-radius:6px;cursor:pointer;font-size:0.75rem;font-family:var(--mono);transition:all 0.15s}
+.ws-x:hover{border-color:var(--text);color:var(--text)}
+lbl{font-family:var(--mono);font-size:0.7rem;color:var(--muted);letter-spacing:0.5px;display:block;margin-bottom:0.5rem;text-transform:uppercase}
+textarea,input[type=text]{width:100%;background:var(--black3);border:1px solid var(--border2);color:var(--text);border-radius:8px;padding:0.9rem 1rem;font-family:var(--mono);font-size:0.82rem;resize:vertical;outline:none;transition:border 0.15s;line-height:1.65}
+textarea:focus,input[type=text]:focus{border-color:var(--cyan)}
+.out{background:var(--black4);border:1px solid var(--border);border-radius:8px;padding:1rem;font-family:var(--mono);font-size:0.82rem;color:var(--cyan);min-height:80px;white-space:pre-wrap;word-break:break-all;line-height:1.65}
+.btns{display:flex;gap:0.6rem;margin:0.75rem 0;flex-wrap:wrap}
+.btn{padding:0.5rem 1.1rem;border-radius:6px;font-family:var(--mono);font-size:0.75rem;cursor:pointer;transition:all 0.15s;border:1px solid}
+.btn-primary{background:var(--cyan);border-color:var(--cyan);color:#050508;font-weight:600}
+.btn-primary:hover{background:var(--cyan-dim);border-color:var(--cyan-dim)}
+.btn-sec{background:transparent;border-color:var(--border2);color:var(--text)}
+.btn-sec:hover{border-color:var(--cyan);color:var(--cyan)}
+.stats-row{display:flex;gap:0.75rem;flex-wrap:wrap;margin-top:0.75rem}
+.stat-chip{background:var(--black4);border:1px solid var(--border);border-radius:6px;padding:0.5rem 0.9rem;font-family:var(--mono);font-size:0.75rem;color:var(--muted2)}
+.stat-chip span{color:var(--cyan);font-weight:600}
+.copied{font-family:var(--mono);font-size:0.72rem;color:var(--cyan);margin-top:0.5rem;display:none}
+.copied.show{display:block}
+select{background:var(--black3);border:1px solid var(--border2);color:var(--text);border-radius:6px;padding:0.5rem 0.9rem;font-family:var(--mono);font-size:0.78rem;outline:none;cursor:pointer}
+select:focus{border-color:var(--cyan)}
+input[type=range]{accent-color:var(--cyan)}
+.chk-group{display:flex;gap:1.2rem;flex-wrap:wrap}
+.chk-group label{display:flex;align-items:center;gap:0.4rem;font-family:var(--mono);font-size:0.75rem;color:var(--muted2);cursor:pointer}
+.chk-group input[type=checkbox]{accent-color:var(--cyan);width:14px;height:14px}
+.range-row{display:flex;align-items:center;gap:1rem;margin-bottom:1rem}
+.range-row lbl{margin:0;white-space:nowrap}
+.range-row input[type=range]{flex:1}
+.range-val{font-family:var(--mono);font-size:0.82rem;color:var(--cyan);min-width:28px;font-weight:600}
+
+.faq-section{max-width:860px;margin:0 auto 4rem;padding:0 2.5rem}
+.faq-title{font-family:var(--mono);font-size:0.7rem;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:1.5rem}
+.faq-item{border-bottom:1px solid var(--border);padding:1.2rem 0}
+.faq-q{font-size:0.92rem;font-weight:600;color:#fff;margin-bottom:0.5rem;letter-spacing:-0.2px}
+.faq-a{font-size:0.82rem;color:var(--muted2);line-height:1.7;font-weight:300}
+
+footer{border-top:1px solid var(--border);padding:2.5rem;text-align:center}
+footer p{font-family:var(--mono);font-size:0.72rem;color:var(--muted);letter-spacing:0.3px}
+footer a{color:var(--cyan);text-decoration:none}
+footer a:hover{text-decoration:underline}
+.footer-links{display:flex;justify-content:center;gap:2rem;margin-bottom:1rem}
+.footer-links a{color:var(--muted2);text-decoration:none;font-family:var(--mono);font-size:0.72rem}
+.footer-links a:hover{color:var(--cyan)}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo"><div class="logo-dot"></div>dev<em>toolsmax</em>.me</div>
+  <div class="nav-right">
+    <div class="nav-links">
+      <a onclick="filterTab('all')">All tools</a>
+      <a onclick="filterTab('text')">Text</a>
+      <a onclick="filterTab('encode')">Encode</a>
+      <a onclick="filterTab('generate')">Generate</a>
+    </div>
+    <div class="nav-badge">Free forever</div>
+  </div>
+</nav>
+
+<main>
+  <div class="hero">
+    <div class="hero-label">Developer utilities</div>
+    <h1>Every tool you need<span class="line2">in one clean place.</span></h1>
+    <p class="hero-sub">Fast, free utilities for developers. No signup, no tracking, no bloat — everything runs directly in your browser.</p>
+    <div class="hero-stats">
+      <div class="stat-item"><span class="stat-num">6+</span><div class="stat-lbl">Tools</div></div>
+      <div class="stat-item"><span class="stat-num">0ms</span><div class="stat-lbl">Server latency</div></div>
+      <div class="stat-item"><span class="stat-num">100%</span><div class="stat-lbl">Free</div></div>
+      <div class="stat-item"><span class="stat-num">0</span><div class="stat-lbl">Signups needed</div></div>
+    </div>
+  </div>
+
+  <div class="section-label">Browse tools</div>
+  <div class="tabs-bar">
+    <button class="tab active" onclick="filterTab('all',this)">All tools</button>
+    <button class="tab" onclick="filterTab('text',this)">Text</button>
+    <button class="tab" onclick="filterTab('encode',this)">Encode / Decode</button>
+    <button class="tab" onclick="filterTab('generate',this)">Generate</button>
+  </div>
+
+  <div style="height:1px;max-width:1100px;margin:0 auto;background:transparent"></div>
+
+  <div class="tools-grid" id="grid">
+
+    <article class="tool-card vis" data-cat="text" itemscope itemtype="https://schema.org/SoftwareApplication">
+      <meta itemprop="name" content="JSON Formatter">
+      <meta itemprop="applicationCategory" content="DeveloperApplication">
+      <div class="tool-cat">text</div>
+      <h3 itemprop="name">JSON Formatter</h3>
+      <p itemprop="description">Paste messy JSON and instantly get it beautifully formatted or minified. Validates syntax and highlights errors.</p>
+      <button class="tool-open" onclick="openTool('json')">Open tool <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg></button>
+    </article>
+
+    <article class="tool-card vis" data-cat="text" itemscope itemtype="https://schema.org/SoftwareApplication">
+      <meta itemprop="name" content="Word Counter">
+      <div class="tool-cat">text</div>
+      <h3>Word &amp; Character Counter</h3>
+      <p>Count words, characters, sentences and get an estimated reading time. Updates live as you type.</p>
+      <button class="tool-open" onclick="openTool('wc')">Open tool <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg></button>
+    </article>
+
+    <article class="tool-card vis" data-cat="encode" itemscope itemtype="https://schema.org/SoftwareApplication">
+      <meta itemprop="name" content="Base64 Encoder Decoder">
+      <div class="tool-cat">encode</div>
+      <h3>Base64 Encoder / Decoder</h3>
+      <p>Encode plain text to Base64 or decode Base64 strings back to text. Essential for APIs and data transfer.</p>
+      <button class="tool-open" onclick="openTool('b64')">Open tool <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg></button>
+    </article>
+
+    <article class="tool-card vis" data-cat="encode" itemscope itemtype="https://schema.org/SoftwareApplication">
+      <meta itemprop="name" content="URL Encoder Decoder">
+      <div class="tool-cat">encode</div>
+      <h3>URL Encoder / Decoder</h3>
+      <p>Encode special characters for safe URL usage or decode percent-encoded query strings back to readable text.</p>
+      <button class="tool-open" onclick="openTool('url')">Open tool <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg></button>
+    </article>
+
+    <article class="tool-card vis" data-cat="generate" itemscope itemtype="https://schema.org/SoftwareApplication">
+      <meta itemprop="name" content="Password Generator">
+      <div class="tool-cat">generate</div>
+      <h3>Password Generator</h3>
+      <p>Generate cryptographically strong random passwords. Customize length, character sets, and complexity rules.</p>
+      <button class="tool-open" onclick="openTool('pwd')">Open tool <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg></button>
+    </article>
+
+    <article class="tool-card vis" data-cat="generate" itemscope itemtype="https://schema.org/SoftwareApplication">
+      <meta itemprop="name" content="UUID Generator">
+      <div class="tool-cat">generate</div>
+      <h3>UUID Generator</h3>
+      <p>Generate RFC 4122 compliant v4 UUIDs using the Web Crypto API. Generate up to 20 at a time.</p>
+      <button class="tool-open" onclick="openTool('uuid')">Open tool <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg></button>
+    </article>
+
+  </div>
+
+  <div class="workspace" id="ws-json">
+    <div class="ws-bar"><div class="ws-name">JSON Formatter</div><button class="ws-x" onclick="closeWS('json')">close</button></div>
+    <lbl>Input JSON</lbl>
+    <textarea id="json-in" rows="8" placeholder='{"name":"devtoolbox","tools":["json","base64","uuid"]}'></textarea>
+    <div class="btns">
+      <button class="btn btn-primary" onclick="fmtJSON()">Format</button>
+      <button class="btn btn-sec" onclick="minJSON()">Minify</button>
+      <button class="btn btn-sec" onclick="cpOut('json-out','json-cp')">Copy output</button>
+    </div>
+    <lbl>Output</lbl>
+    <div class="out" id="json-out">Formatted JSON will appear here...</div>
+    <div class="copied" id="json-cp">Copied to clipboard</div>
+  </div>
+
+  <div class="workspace" id="ws-wc">
+    <div class="ws-bar"><div class="ws-name">Word &amp; Character Counter</div><button class="ws-x" onclick="closeWS('wc')">close</button></div>
+    <lbl>Your text</lbl>
+    <textarea id="wc-in" rows="8" placeholder="Paste or type your text here..." oninput="doWC()"></textarea>
+    <div class="stats-row">
+      <div class="stat-chip">Words: <span id="wc-w">0</span></div>
+      <div class="stat-chip">Characters: <span id="wc-c">0</span></div>
+      <div class="stat-chip">No spaces: <span id="wc-ns">0</span></div>
+      <div class="stat-chip">Sentences: <span id="wc-s">0</span></div>
+      <div class="stat-chip">Read time: <span id="wc-r">0 min</span></div>
+      <div class="stat-chip">Paragraphs: <span id="wc-p">0</span></div>
+    </div>
+  </div>
+
+  <div class="workspace" id="ws-b64">
+    <div class="ws-bar"><div class="ws-name">Base64 Encoder / Decoder</div><button class="ws-x" onclick="closeWS('b64')">close</button></div>
+    <lbl>Input</lbl>
+    <textarea id="b64-in" rows="4" placeholder="Enter plain text to encode, or Base64 to decode..."></textarea>
+    <div class="btns">
+      <button class="btn btn-primary" onclick="encB64()">Encode &rarr;</button>
+      <button class="btn btn-sec" onclick="decB64()">&larr; Decode</button>
+      <button class="btn btn-sec" onclick="cpOut('b64-out','b64-cp')">Copy</button>
+    </div>
+    <lbl>Output</lbl>
+    <div class="out" id="b64-out">Result will appear here...</div>
+    <div class="copied" id="b64-cp">Copied to clipboard</div>
+  </div>
+
+  <div class="workspace" id="ws-url">
+    <div class="ws-bar"><div class="ws-name">URL Encoder / Decoder</div><button class="ws-x" onclick="closeWS('url')">close</button></div>
+    <lbl>Input</lbl>
+    <textarea id="url-in" rows="4" placeholder="Enter a URL or encoded string..."></textarea>
+    <div class="btns">
+      <button class="btn btn-primary" onclick="encURL()">Encode &rarr;</button>
+      <button class="btn btn-sec" onclick="decURL()">&larr; Decode</button>
+      <button class="btn btn-sec" onclick="cpOut('url-out','url-cp')">Copy</button>
+    </div>
+    <lbl>Output</lbl>
+    <div class="out" id="url-out">Result will appear here...</div>
+    <div class="copied" id="url-cp">Copied to clipboard</div>
+  </div>
+
+  <div class="workspace" id="ws-pwd">
+    <div class="ws-bar"><div class="ws-name">Password Generator</div><button class="ws-x" onclick="closeWS('pwd')">close</button></div>
+    <div class="range-row"><lbl>Length:</lbl><input type="range" min="8" max="64" value="16" step="1" id="pwd-len" oninput="document.getElementById('pwd-lv').textContent=this.value"><span class="range-val" id="pwd-lv">16</span></div>
+    <div class="chk-group" style="margin-bottom:1rem">
+      <label><input type="checkbox" id="p-up" checked> Uppercase A-Z</label>
+      <label><input type="checkbox" id="p-lo" checked> Lowercase a-z</label>
+      <label><input type="checkbox" id="p-nu" checked> Numbers 0-9</label>
+      <label><input type="checkbox" id="p-sy" checked> Symbols !@#$</label>
+    </div>
+    <div class="btns">
+      <button class="btn btn-primary" onclick="genPwd()">Generate password</button>
+      <button class="btn btn-sec" onclick="cpOut('pwd-out','pwd-cp')">Copy</button>
+    </div>
+    <lbl>Generated password</lbl>
+    <div class="out" id="pwd-out" style="font-size:1rem;letter-spacing:2px;min-height:56px;display:flex;align-items:center">Click generate</div>
+    <div class="copied" id="pwd-cp">Copied to clipboard</div>
+  </div>
+
+  <div class="workspace" id="ws-uuid">
+    <div class="ws-bar"><div class="ws-name">UUID Generator</div><button class="ws-x" onclick="closeWS('uuid')">close</button></div>
+    <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1rem">
+      <lbl style="margin:0">Count:</lbl>
+      <select id="uuid-n"><option value="1">1 UUID</option><option value="5">5 UUIDs</option><option value="10">10 UUIDs</option><option value="20">20 UUIDs</option></select>
+    </div>
+    <div class="btns">
+      <button class="btn btn-primary" onclick="genUUID()">Generate</button>
+      <button class="btn btn-sec" onclick="cpOut('uuid-out','uuid-cp')">Copy all</button>
+    </div>
+    <lbl>Output</lbl>
+    <div class="out" id="uuid-out">Click generate</div>
+    <div class="copied" id="uuid-cp">Copied to clipboard</div>
+  </div>
+
+  <div class="faq-section">
+    <div class="faq-title">Frequently asked questions</div>
+    <div class="faq-item">
+      <div class="faq-q">Are these tools really free?</div>
+      <div class="faq-a">Yes, completely free. No account needed, no hidden limits. DevToolbox is supported by non-intrusive ads and affiliate links for products we actually recommend.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Is my data safe?</div>
+      <div class="faq-a">All tools run 100% in your browser using JavaScript. Nothing you type is ever sent to any server. Your data never leaves your device.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Can I suggest a new tool?</div>
+      <div class="faq-a">Absolutely. We add new tools regularly based on community requests. Use the suggest a tool link in the footer to submit your idea.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">How is the UUID generated?</div>
+      <div class="faq-a">UUIDs are generated using the Web Crypto API (crypto.getRandomValues) which provides cryptographically secure random bytes, fully RFC 4122 v4 compliant.</div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="footer-links">
+    <a href="#">About</a>
+    <a href="#">All tools</a>
+    <a href="#">Suggest a tool</a>
+    <a href="#">Privacy policy</a>
+  </div>
+  <p>devtoolsmax.me &mdash; free developer tools &mdash; built with care</p>
+  <p style="margin-top:0.5rem;opacity:0.4">Everything runs in your browser. Zero server-side processing.</p>
+</footer>
+
+<script>
+function filterTab(cat,el){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  if(el)el.classList.add('active');
+  document.querySelectorAll('.tool-card').forEach(c=>{
+    c.classList.toggle('vis',cat==='all'||c.dataset.cat===cat);
+  });
+}
+function openTool(id){
+  document.querySelectorAll('.workspace').forEach(w=>w.classList.remove('open'));
+  var ws=document.getElementById('ws-'+id);
+  ws.classList.add('open');
+  setTimeout(()=>ws.scrollIntoView({behavior:'smooth',block:'start'}),50);
+}
+function closeWS(id){document.getElementById('ws-'+id).classList.remove('open')}
+
+function fmtJSON(){
+  try{document.getElementById('json-out').textContent=JSON.stringify(JSON.parse(document.getElementById('json-in').value),null,2)}
+  catch(e){document.getElementById('json-out').textContent='Error: '+e.message}
+}
+function minJSON(){
+  try{document.getElementById('json-out').textContent=JSON.stringify(JSON.parse(document.getElementById('json-in').value))}
+  catch(e){document.getElementById('json-out').textContent='Error: '+e.message}
+}
+
+function doWC(){
+  var t=document.getElementById('wc-in').value;
+  var w=t.trim()===''?0:t.trim().split(/\s+/).length;
+  document.getElementById('wc-w').textContent=w;
+  document.getElementById('wc-c').textContent=t.length;
+  document.getElementById('wc-ns').textContent=t.replace(/\s/g,'').length;
+  document.getElementById('wc-s').textContent=(t.match(/[.!?]+/g)||[]).length;
+  document.getElementById('wc-r').textContent=Math.ceil(w/200)+' min';
+  document.getElementById('wc-p').textContent=(t.split(/\n\s*\n/).filter(p=>p.trim().length>0).length)||0;
+}
+
+function encB64(){
+  try{document.getElementById('b64-out').textContent=btoa(unescape(encodeURIComponent(document.getElementById('b64-in').value)))}
+  catch(e){document.getElementById('b64-out').textContent='Error: '+e.message}
+}
+function decB64(){
+  try{document.getElementById('b64-out').textContent=decodeURIComponent(escape(atob(document.getElementById('b64-in').value)))}
+  catch(e){document.getElementById('b64-out').textContent='Error: Invalid Base64 string'}
+}
+
+function encURL(){document.getElementById('url-out').textContent=encodeURIComponent(document.getElementById('url-in').value)}
+function decURL(){
+  try{document.getElementById('url-out').textContent=decodeURIComponent(document.getElementById('url-in').value)}
+  catch(e){document.getElementById('url-out').textContent='Error: Invalid encoding'}
+}
+
+function genPwd(){
+  var c='';
+  if(document.getElementById('p-up').checked)c+='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  if(document.getElementById('p-lo').checked)c+='abcdefghijklmnopqrstuvwxyz';
+  if(document.getElementById('p-nu').checked)c+='0123456789';
+  if(document.getElementById('p-sy').checked)c+='!@#$%^&*()-_=+[]{}|;:,.<>?';
+  if(!c){document.getElementById('pwd-out').textContent='Select at least one character type';return}
+  var len=parseInt(document.getElementById('pwd-len').value);
+  var arr=new Uint8Array(len);
+  crypto.getRandomValues(arr);
+  document.getElementById('pwd-out').textContent=Array.from(arr).map(b=>c[b%c.length]).join('');
+}
+
+function genUUID(){
+  var n=parseInt(document.getElementById('uuid-n').value);
+  var out=[];
+  for(var i=0;i<n;i++){
+    out.push(([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g,function(c){
+      return(c^crypto.getRandomValues(new Uint8Array(1))[0]&15>>c/4).toString(16);
+    }));
+  }
+  document.getElementById('uuid-out').textContent=out.join('\n');
+}
+
+function cpOut(id,hint){
+  navigator.clipboard.writeText(document.getElementById(id).textContent).then(function(){
+    var h=document.getElementById(hint);
+    h.classList.add('show');
+    setTimeout(function(){h.classList.remove('show')},2000);
+  });
+}
+</script>
+</body>
+</html>
